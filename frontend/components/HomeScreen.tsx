@@ -1,14 +1,13 @@
+import React from "react";
 import { useCallback, useEffect, useState } from "react";
 import { Platform, Text, View } from "react-native";
 import { PlaidLink, LinkSuccess, LinkExit } from "react-native-plaid-link-sdk";
 
 var styles = require('./style');
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
     const [linkToken, setLinkToken] = useState(null);
     const address = Platform.OS === 'ios' ? 'localhost' : '10.0.2.2';
-
-    const [data, setData] = useState(null);
 
     const createLinkToken = useCallback(async () => {
         await fetch(`http://${address}:8080/api/create_link_token`, {
@@ -56,25 +55,7 @@ const HomeScreen = () => {
                                 console.log(err);
                             });
                         // navigation.navigate('Success', success);
-                        await fetch(`http://${address}:8080/api/balance`, {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json",
-                            },
-                        })
-                            .then((response) => response.json())
-                            .then((data) => {
-                                setData(data);
-                                // console.log('official name: ', data.Balance.accounts[0].)
-                                data.Balance.accounts.forEach(acc => {
-                                    console.log('official_name: ', acc.official_name)
-                                    console.log('current balance: ', acc.balances.available)
-                                });
-                                // console.log(JSON.stringify(data));
-                            })
-                            .catch((err) => {
-                                console.log(err);
-                            })
+                        navigation.navigate('Success');
                     }}
                     onExit={(response: LinkExit) => {
                         console.log(response);
