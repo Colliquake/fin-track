@@ -5,7 +5,7 @@ import { PlaidLink, LinkSuccess, LinkExit } from "react-native-plaid-link-sdk";
 
 var styles = require('./style');
 
-const HomeScreen = ({navigation}) => {
+const HomeScreen = ({ navigation }) => {
     const [linkToken, setLinkToken] = useState(null);
     const address = Platform.OS === 'ios' ? 'localhost' : '10.0.2.2';
 

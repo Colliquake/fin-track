@@ -54,7 +54,7 @@ const Item = ({ item, onPress, backgroundColor, textColor }: ItemProps) => (
     </TouchableOpacity>
 );
 
-const CategoriesList = () => {
+const CategoriesList = ({navigation}) => {
     const [selectedId, setSelectedId] = useState<string>();
 
     const renderItem = ({ item }: {item: ItemData}) => {
@@ -64,7 +64,10 @@ const CategoriesList = () => {
         return (
             <Item
                 item={item}
-                onPress={() => setSelectedId(item.id)}
+                // onPress={() => setSelectedId(item.id)}
+                onPress={() => navigation.navigate('BudgetDetails', {
+                    categoryTitle: item.title
+                })}
                 backgroundColor={backgroundColor}
                 textColor={color}
             />
