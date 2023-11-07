@@ -11,6 +11,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import HomeScreen from './components/HomeScreen';
 import SuccessScreen from './components/SuccessScreen';
+import BudgetScreen from './components/Budget/BudgetScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -18,13 +19,14 @@ const App = (): React.ReactElement => {
 
   return (
     <SafeAreaProvider>
-       <NavigationContainer>
-         <Stack.Navigator>
-           <Stack.Screen name="Home" component={HomeScreen} />
-           <Stack.Screen name="Success" component={SuccessScreen} />
-         </Stack.Navigator>
-       </NavigationContainer>
-     </SafeAreaProvider>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Budget" component={BudgetScreen} />
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Success" component={SuccessScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 }
 

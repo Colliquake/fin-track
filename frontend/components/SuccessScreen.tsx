@@ -34,9 +34,24 @@ const SuccessScreen = () => {
             });
     }
 
+    // const getTransactions = async () => {
+    //     await fetch(`http://${address}:8080/api/transactions`, {
+    //         method: "GET",
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //         },
+    //     })
+    //     .then((response) => response.json())
+    //     .then((data) => console.log(data))
+    //     .catch((err) => {
+    //         console.log(err);
+    //     });
+    // }
+
     useEffect(() => {
         if (data == null) {
             getBalance();
+            // getTransactions();
         }
     }, [data])
 

@@ -6,7 +6,7 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
-const {Configuration, PlaidApi, PlaidEnvironments} = require('plaid');
+const { Configuration, PlaidApi, PlaidEnvironments } = require('plaid');
 
 const app = express();
 const port = 8080;
@@ -14,10 +14,10 @@ const port = 8080;
 app.use(
   // FOR DEMO PURPOSES ONLY
   // Use an actual secret key in production
-  session({secret: 'bosco', saveUninitialized: true, resave: true}),
+  session({ secret: 'bosco', saveUninitialized: true, resave: true }),
 );
 
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Configuration for the Plaid client
@@ -41,7 +41,7 @@ app.post('/api/create_link_token', async (req, res, next) => {
   //Payload if running iOS
   if (req.body.address === 'localhost') {
     payload = {
-      user: {client_user_id: req.sessionID},
+      user: { client_user_id: req.sessionID },
       client_name: 'Plaid Tiny Quickstart - React Native',
       language: 'en',
       products: ['auth'],
@@ -51,7 +51,7 @@ app.post('/api/create_link_token', async (req, res, next) => {
   } else {
     //Payload if running Android
     payload = {
-      user: {client_user_id: req.sessionID},
+      user: { client_user_id: req.sessionID },
       client_name: 'Plaid Tiny Quickstart - React Native',
       language: 'en',
       products: ['auth'],
@@ -80,8 +80,8 @@ app.post('/api/exchange_public_token', async (req, res, next) => {
 app.post('/api/balance', async (req, res, next) => {
   const access_token = req.session.access_token;
   // console.log('access token (already been set): ', access_token)
-  const balanceResponse = await client.accountsBalanceGet({access_token});
-  const accounts = balanceResponse.data.accounts;
+  const balanceResponse = await client.accountsBalanceGet({ access_token });
+  // const accounts = balanceResponse.data.accounts;
   res.json({
     Balance: balanceResponse.data,
     // token_string: access_token,
@@ -89,6 +89,48 @@ app.post('/api/balance', async (req, res, next) => {
   });
   // console.log('HERE')
 });
+
+// app.get('/api/transactions', async (req, res, next) => {
+//   const request = {
+//     access_token: req.session.access_token,
+//     start_date: '2018-01-01',
+//     end_date: '2020-02-01'
+//   };
+
+//   // const transactionsResponse = await client.transactionsGet(request);
+//   // res.json({
+//   //   Transactions: transactionsResponse.data,
+//   // });
+
+//   const response = await client.transactionsGet(request);
+
+//   let transactions = response.data.transactions;
+
+//   const total_transactions = response.data.total_transactions;
+
+//   // Manipulate the offset parameter to paginate
+
+//   // transactions and retrieve all available data
+
+//   while (transactions.length < total_transactions) {
+//     const paginatedRequest = {
+//       access_token: accessToken,
+//       start_date: '2018-01-01',
+//       end_date: '2020-02-01',
+//       options: {
+//         offset: transactions.length
+//       },
+//     };
+//     const paginatedResponse = await client.transactionsGet(paginatedRequest);
+//     transactions = transactions.concat(
+//       paginatedResponse.data.transactions,
+//     );
+//   }
+  
+//   res.json({
+//     Transactions: transactions,
+//   })
+// });
 
 app.listen(port, () => {
   console.log(`Backend server is running on port ${port}...`);
