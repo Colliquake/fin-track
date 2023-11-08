@@ -58,7 +58,7 @@ const CategoriesList = ({navigation}) => {
     const [selectedId, setSelectedId] = useState<string>();
 
     const renderItem = ({ item }: {item: ItemData}) => {
-        const backgroundColor = item.id === selectedId ? '#6e3b6e' : '#f9c2ff';
+        // const backgroundColor = item.id === selectedId ? '#6e3b6e' : '#f9c2ff';
         const color = item.id === selectedId ? 'white' : 'black';
 
         return (
@@ -68,7 +68,8 @@ const CategoriesList = ({navigation}) => {
                 onPress={() => navigation.navigate('BudgetDetails', {
                     categoryTitle: item.title
                 })}
-                backgroundColor={backgroundColor}
+                // backgroundColor={backgroundColor}
+                backgroundColor='white'
                 textColor={color}
             />
         )

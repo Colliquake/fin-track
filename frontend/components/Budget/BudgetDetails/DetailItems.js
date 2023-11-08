@@ -78,8 +78,8 @@ const DATA = {
         },
         {
             title: 'Public transportation',
-            amountSpent: 0,
-            max: 0,
+            amountSpent: 99,
+            max: 100,
         },
         {
             title: 'Travel',
@@ -98,8 +98,8 @@ const DATA = {
         },
         {
             title: 'Fuel',
-            amountSpent: 0,
-            max: 0,
+            amountSpent: 20,
+            max: 20,
         },
         {
             title: 'Car maintenance and repairs',
